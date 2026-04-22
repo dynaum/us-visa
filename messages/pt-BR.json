@@ -1,0 +1,68 @@
+{
+  "meta": {
+    "title": "Guia do Visto Americano",
+    "description": "Passo a passo para o visto americano de turismo (B1/B2)."
+  },
+  "nav": {
+    "home": "Início",
+    "guide": "Passo a passo",
+    "checklist": "Checklist",
+    "simulator": "Simulador de entrevista"
+  },
+  "home": {
+    "heading": "Seu guia para o visto americano de turismo",
+    "subheading": "Feito para quem nunca tirou o visto antes. Claro, objetivo, do começo ao fim.",
+    "ctaStart": "Começar o passo a passo",
+    "ctaChecklist": "Ver checklist de documentos"
+  },
+  "guide": {
+    "heading": "Passo a passo",
+    "intro": "O processo tem 5 etapas. Clique em cada uma para ver os detalhes."
+  },
+  "stepper": {
+    "stage": "Etapa {current} de {total}",
+    "completed": "concluída",
+    "markDone": "Marcar como concluída",
+    "markUndone": "Desmarcar"
+  },
+  "stages": {
+    "mrv-fee": {
+      "title": "Pagar a taxa MRV",
+      "summary": "A taxa consular de US$ 185, paga antes de agendar."
+    },
+    "ds-160": {
+      "title": "Preencher o DS-160",
+      "summary": "O formulário online com seus dados para o consulado."
+    },
+    "scheduling": {
+      "title": "Agendar CASV e entrevista",
+      "summary": "Dois agendamentos: biometria (CASV) e entrevista consular."
+    },
+    "documents": {
+      "title": "Preparar os documentos",
+      "summary": "O que levar no dia — checklist interativo."
+    },
+    "interview": {
+      "title": "Fazer a entrevista",
+      "summary": "O que esperar, perguntas comuns, como se preparar."
+    }
+  },
+  "checklist": {
+    "heading": "Checklist de documentos",
+    "intro": "Marque cada item conforme for preparando. Seu progresso fica salvo neste navegador.",
+    "empty": "Nenhum item marcado ainda.",
+    "printHint": "Dica: use a função imprimir do navegador para levar em papel."
+  },
+  "simulator": {
+    "heading": "Simulador de entrevista",
+    "intro": "Pratique respondendo às perguntas mais comuns. Seja breve, claro e sempre honesto.",
+    "next": "Próxima pergunta",
+    "previous": "Anterior",
+    "markPracticed": "Marcar como praticada"
+  },
+  "disclaimer": "Este site não é oficial nem representa o governo dos EUA ou do Brasil. As informações são para orientação geral e não substituem aconselhamento jurídico.",
+  "footer": {
+    "notOfficial": "Site não oficial — apenas orientação.",
+    "sourceCode": "Código-fonte"
+  }
+}
