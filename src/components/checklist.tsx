@@ -26,13 +26,11 @@ export function Checklist({ groups }: { groups: ChecklistGroup[] }) {
   const pct = total === 0 ? 0 : Math.round((done / total) * 100);
 
   return (
-    <div className="space-y-8">
-      <div className="surface rounded-2xl p-5">
-        <div className="flex items-baseline justify-between">
-          <p className="text-sm font-medium text-neutral-700">
-            Progresso
-          </p>
-          <p className="font-[family-name:var(--font-instrument-serif)] text-2xl font-semibold">
+    <div className="space-y-6 sm:space-y-8">
+      <div className="surface rounded-2xl p-4 sm:p-5">
+        <div className="flex items-baseline justify-between gap-3">
+          <p className="text-sm font-semibold text-neutral-700">Progresso</p>
+          <p className="font-[family-name:var(--font-fraunces)] text-xl sm:text-2xl">
             {done}
             <span className="text-neutral-400"> / {total}</span>
           </p>
@@ -56,13 +54,13 @@ export function Checklist({ groups }: { groups: ChecklistGroup[] }) {
             <header className="flex items-center gap-3">
               <span
                 aria-hidden
-                className="grid h-9 w-9 place-items-center rounded-xl bg-gradient-to-br from-brand-50 to-brand-100 text-lg"
+                className="grid h-10 w-10 flex-none place-items-center rounded-xl bg-gradient-to-br from-brand-50 to-brand-100 text-lg"
               >
                 {GROUP_ICONS[group.id] ?? '•'}
               </span>
-              <div>
-                <h2 className="font-semibold tracking-tight">{group.title}</h2>
-                <p className="text-xs text-neutral-500">
+              <div className="min-w-0">
+                <h2 className="text-base tracking-tight sm:text-lg">{group.title}</h2>
+                <p className="text-xs font-medium text-neutral-500">
                   {groupDone} / {group.items.length}
                 </p>
               </div>
@@ -75,10 +73,8 @@ export function Checklist({ groups }: { groups: ChecklistGroup[] }) {
                     <label
                       htmlFor={`cb-${item.id}`}
                       className={[
-                        'flex cursor-pointer items-center gap-3 px-4 py-3 transition-colors',
-                        checked
-                          ? 'bg-brand-50/40'
-                          : 'hover:bg-[var(--surface-muted)]',
+                        'flex cursor-pointer items-start gap-3 px-4 py-3 transition-colors',
+                        checked ? 'bg-brand-50/40' : 'hover:bg-[var(--surface-muted)]',
                       ].join(' ')}
                     >
                       <input
@@ -86,14 +82,15 @@ export function Checklist({ groups }: { groups: ChecklistGroup[] }) {
                         type="checkbox"
                         checked={checked}
                         onChange={() => setState(toggleChecklistItem(item.id))}
-                        className="h-4 w-4 flex-none accent-brand-600"
+                        className="mt-0.5 h-5 w-5 flex-none accent-brand-600"
                       />
                       <span
-                        className={
+                        className={[
+                          'text-sm sm:text-base',
                           checked
                             ? 'text-neutral-500 line-through decoration-brand-400/60'
-                            : 'text-[var(--foreground)]'
-                        }
+                            : 'text-[var(--foreground)]',
+                        ].join(' ')}
                       >
                         {item.label}
                       </span>

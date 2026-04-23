@@ -13,24 +13,13 @@
   --color-brand-800: oklch(0.29 0.10 245);
   --color-brand-900: oklch(0.22 0.07 245);
 
-  --color-ink-50: oklch(0.98 0.004 80);
-  --color-ink-100: oklch(0.96 0.006 80);
-  --color-ink-200: oklch(0.92 0.008 80);
-  --color-ink-300: oklch(0.84 0.010 80);
-  --color-ink-400: oklch(0.68 0.012 80);
-  --color-ink-500: oklch(0.52 0.014 80);
-  --color-ink-600: oklch(0.40 0.014 80);
-  --color-ink-700: oklch(0.30 0.012 80);
-  --color-ink-800: oklch(0.22 0.010 80);
-  --color-ink-900: oklch(0.15 0.008 80);
-
-  --font-sans: "Manrope", ui-sans-serif, system-ui, -apple-system, sans-serif;
-  --font-display: "Instrument Serif", ui-serif, Georgia, serif;
+  --font-sans: "Nunito", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-display: "Fraunces", ui-serif, Georgia, serif;
 }
 
 :root {
   --background: #fbfaf7;
-  --foreground: oklch(0.18 0.010 80);
+  --foreground: oklch(0.20 0.010 80);
   --surface: #ffffff;
   --surface-muted: #f4f1ec;
   --border-subtle: oklch(0.88 0.010 80);
@@ -39,18 +28,23 @@
 
 html {
   scroll-behavior: smooth;
+  /* Slightly smaller base on mobile for a calmer reading density */
+  font-size: 15.5px;
+}
+@media (min-width: 640px) {
+  html { font-size: 16px; }
 }
 
 html, body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans);
-  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+  line-height: 1.6;
 }
 
-/* Subtle warm gradient wash — editorial, airy */
+/* Soft warm gradient wash */
 body::before {
   content: "";
   position: fixed;
@@ -65,8 +59,11 @@ body::before {
 
 h1, h2, h3, h4 {
   font-family: var(--font-display);
-  font-weight: 400;
-  letter-spacing: -0.02em;
+  /* Fraunces variable axes — SOFT rounds terminals, slight optical size bump */
+  font-variation-settings: "SOFT" 100, "WONK" 0, "opsz" 144;
+  font-weight: 500;
+  letter-spacing: -0.015em;
+  line-height: 1.15;
 }
 
 a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible {

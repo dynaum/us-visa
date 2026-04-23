@@ -22,9 +22,9 @@ export function Stepper({ activeStageId }: { activeStageId?: StageId }) {
               href={`/${locale}/stages/${stage.slug}`}
               aria-current={isActive ? 'step' : undefined}
               className={[
-                'group relative flex flex-col gap-1.5 rounded-xl border p-3 transition-all',
+                'group relative flex flex-col gap-1.5 rounded-2xl border p-3 transition-all',
                 isActive
-                  ? 'border-brand-500 bg-gradient-to-br from-brand-50 to-brand-100/50 shadow-sm'
+                  ? 'border-brand-500 bg-gradient-to-br from-brand-50 to-brand-100/60 shadow-sm'
                   : 'border-[var(--border-subtle)] bg-[var(--surface)] hover:-translate-y-0.5 hover:border-brand-300 hover:shadow-sm',
               ].join(' ')}
             >
@@ -45,7 +45,7 @@ export function Stepper({ activeStageId }: { activeStageId?: StageId }) {
                   {stage.icon}
                 </span>
               </div>
-              <span className="text-sm font-medium leading-tight">{t(`${stage.id}.title`)}</span>
+              <span className="text-sm font-semibold leading-tight">{t(`${stage.id}.title`)}</span>
             </Link>
           </li>
         );

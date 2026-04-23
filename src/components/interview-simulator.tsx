@@ -27,34 +27,34 @@ export function InterviewSimulator({ questions }: { questions: InterviewQuestion
   return (
     <div className="space-y-5">
       <div className="flex flex-wrap items-center justify-between gap-2 text-sm">
-        <p className="font-medium text-neutral-700">
+        <p className="font-semibold text-neutral-700">
           Pergunta{' '}
-          <span className="font-[family-name:var(--font-instrument-serif)] text-lg font-semibold text-[var(--foreground)]">
+          <span className="font-[family-name:var(--font-fraunces)] text-lg text-[var(--foreground)]">
             {index + 1}
           </span>{' '}
           / {questions.length}
         </p>
-        <p className="text-xs text-neutral-500">
+        <p className="text-xs font-medium text-neutral-500">
           Praticadas: {practicedCount} / {questions.length}
         </p>
       </div>
 
-      <article className="relative overflow-hidden rounded-2xl border border-[var(--border-subtle)] bg-[var(--surface)] p-6 shadow-sm sm:p-8">
+      <article className="relative overflow-hidden rounded-2xl border border-[var(--border-subtle)] bg-[var(--surface)] p-5 shadow-sm sm:p-8">
         <div
           aria-hidden
           className="absolute -right-12 -top-12 h-40 w-40 rounded-full bg-gradient-to-br from-brand-400/20 to-brand-700/10 blur-3xl"
         />
         <div className="relative space-y-4">
-          <p className="font-[family-name:var(--font-instrument-serif)] text-2xl font-semibold leading-tight tracking-tight sm:text-3xl">
+          <p className="font-[family-name:var(--font-fraunces)] text-xl leading-tight tracking-tight sm:text-2xl md:text-3xl">
             {q.pt}
           </p>
           <p className="text-sm italic text-neutral-600">{q.en}</p>
           <div className="rounded-xl bg-[var(--surface-muted)] p-4 text-sm leading-relaxed">
-            <span className="mr-1 font-semibold text-brand-700">Dica:</span>
+            <span className="mr-1 font-bold text-brand-700">Dica:</span>
             {q.guidance}
           </div>
 
-          <label className="mt-2 inline-flex cursor-pointer items-center gap-2 rounded-full border border-[var(--border-subtle)] bg-[var(--background)] px-3 py-1.5 text-sm transition-colors hover:border-brand-300">
+          <label className="mt-2 inline-flex cursor-pointer items-center gap-2 rounded-full border border-[var(--border-subtle)] bg-[var(--background)] px-3 py-1.5 text-sm font-semibold transition-colors hover:border-brand-300">
             <input
               type="checkbox"
               checked={isPracticed}
@@ -66,10 +66,10 @@ export function InterviewSimulator({ questions }: { questions: InterviewQuestion
         </div>
       </article>
 
-      <div className="flex items-center justify-between gap-2">
+      <div className="grid grid-cols-2 items-center gap-2 sm:flex sm:justify-between">
         <button
           onClick={() => go(-1)}
-          className="group inline-flex items-center gap-2 rounded-full border border-[var(--border-subtle)] bg-[var(--surface)] px-4 py-2 text-sm font-medium transition-all hover:-translate-x-0.5 hover:border-brand-300"
+          className="group order-1 inline-flex items-center justify-center gap-2 rounded-full border border-[var(--border-subtle)] bg-[var(--surface)] px-4 py-2.5 text-sm font-bold transition-all hover:border-brand-300 sm:order-1"
         >
           <span aria-hidden className="transition-transform group-hover:-translate-x-0.5">
             ←
@@ -77,19 +77,23 @@ export function InterviewSimulator({ questions }: { questions: InterviewQuestion
           {t('previous')}
         </button>
 
-        <div className="flex gap-1.5">
+        <div
+          className="order-3 col-span-2 flex justify-center gap-1.5 sm:order-2 sm:col-span-1"
+          role="group"
+          aria-label="Progresso das perguntas"
+        >
           {questions.map((item, i) => (
             <button
               key={item.id}
               onClick={() => setIndex(i)}
               aria-label={`Ir para pergunta ${i + 1}`}
               className={[
-                'h-2 rounded-full transition-all',
+                'h-2.5 rounded-full transition-all',
                 i === index
-                  ? 'w-6 bg-brand-600'
+                  ? 'w-7 bg-brand-600'
                   : practiced.includes(item.id)
-                    ? 'w-2 bg-brand-300'
-                    : 'w-2 bg-neutral-300',
+                    ? 'w-2.5 bg-brand-300'
+                    : 'w-2.5 bg-neutral-300',
               ].join(' ')}
             />
           ))}
@@ -97,7 +101,7 @@ export function InterviewSimulator({ questions }: { questions: InterviewQuestion
 
         <button
           onClick={() => go(1)}
-          className="group inline-flex items-center gap-2 rounded-full bg-brand-600 px-4 py-2 text-sm font-semibold text-white shadow-md shadow-brand-600/20 transition-all hover:-translate-y-0.5 hover:bg-brand-700"
+          className="group order-2 inline-flex items-center justify-center gap-2 rounded-full bg-brand-600 px-4 py-2.5 text-sm font-bold text-white shadow-md shadow-brand-600/20 transition-all hover:-translate-y-0.5 hover:bg-brand-700 sm:order-3"
         >
           {t('next')}
           <span aria-hidden className="transition-transform group-hover:translate-x-0.5">

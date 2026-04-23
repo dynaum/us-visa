@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import { Manrope, Instrument_Serif } from 'next/font/google';
+import { Nunito, Fraunces } from 'next/font/google';
 import { notFound } from 'next/navigation';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages, setRequestLocale } from 'next-intl/server';
@@ -8,18 +8,17 @@ import { Header } from '@/components/header';
 import { Footer } from '@/components/footer';
 import { Disclaimer } from '@/components/disclaimer';
 
-const manrope = Manrope({
+const nunito = Nunito({
   subsets: ['latin'],
-  variable: '--font-manrope',
+  variable: '--font-nunito',
   display: 'swap',
 });
 
-const instrumentSerif = Instrument_Serif({
+const fraunces = Fraunces({
   subsets: ['latin'],
-  weight: '400',
-  style: ['normal', 'italic'],
-  variable: '--font-instrument-serif',
+  variable: '--font-fraunces',
   display: 'swap',
+  axes: ['SOFT', 'WONK', 'opsz'],
 });
 
 export function generateStaticParams() {
@@ -42,15 +41,15 @@ export default async function LocaleLayout({
   return (
     <html
       lang={locale}
-      className={`${manrope.variable} ${instrumentSerif.variable}`}
+      className={`${nunito.variable} ${fraunces.variable}`}
       style={{ colorScheme: 'light' }}
     >
       <body className="flex min-h-screen flex-col">
         <NextIntlClientProvider locale={locale} messages={messages}>
           <Header />
-          <div className="mx-auto w-full max-w-5xl flex-1 px-4 py-6 sm:py-10">
+          <div className="mx-auto w-full max-w-5xl flex-1 px-4 py-6 sm:px-6 sm:py-10">
             <Disclaimer />
-            <div className="mt-8">{children}</div>
+            <div className="mt-6 sm:mt-8">{children}</div>
           </div>
           <Footer />
         </NextIntlClientProvider>

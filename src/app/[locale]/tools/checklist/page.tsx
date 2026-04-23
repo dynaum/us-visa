@@ -16,16 +16,16 @@ export default async function ChecklistPage({
 function ChecklistPageContent() {
   const t = useTranslations('checklist');
   return (
-    <main className="space-y-8">
+    <main className="space-y-6 sm:space-y-8">
       <header className="space-y-3">
-        <span className="inline-flex items-center gap-2 rounded-full border border-brand-200 bg-brand-50 px-3 py-1 text-xs font-medium text-brand-800">
+        <span className="inline-flex items-center gap-2 rounded-full border border-brand-200 bg-brand-50 px-3 py-1 text-xs font-bold text-brand-800">
           <span aria-hidden>📋</span>
           Ferramenta
         </span>
-        <h1 className="font-[family-name:var(--font-instrument-serif)] text-4xl font-semibold tracking-tight sm:text-5xl">
+        <h1 className="font-[family-name:var(--font-fraunces)] text-3xl tracking-tight sm:text-4xl md:text-5xl">
           {t('heading')}
         </h1>
-        <p className="max-w-2xl text-lg text-neutral-700">{t('intro')}</p>
+        <p className="max-w-2xl text-base text-neutral-700 sm:text-lg">{t('intro')}</p>
       </header>
 
       <Checklist groups={CHECKLIST_GROUPS} />
