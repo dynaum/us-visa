@@ -5,9 +5,10 @@ export function Disclaimer() {
   return (
     <aside
       role="note"
-      className="border-l-4 border-yellow-500 bg-yellow-50 p-3 text-sm text-yellow-900 dark:bg-yellow-950/40 dark:text-yellow-200"
+      className="flex items-start gap-3 rounded-xl border border-amber-300/60 bg-amber-50/80 p-4 text-sm text-amber-950 shadow-sm dark:border-amber-400/30 dark:bg-amber-950/30 dark:text-amber-100"
     >
-      {t('disclaimer')}
+      <span aria-hidden className="mt-0.5 text-base leading-none">⚠️</span>
+      <p className="leading-relaxed">{t('disclaimer')}</p>
     </aside>
   );
 }
