@@ -20,7 +20,7 @@ export function LocaleSwitcher() {
         const stripped = pathname.replace(new RegExp(`^/${locale}`), '') || '/';
         router.push(`/${next}${stripped === '/' ? '' : stripped}`);
       }}
-      className="rounded-full border border-[var(--border-subtle)] bg-[var(--surface)] px-3 py-1.5 text-xs font-medium"
+      className="rounded-md border border-[var(--border-strong)] bg-white px-2.5 py-1.5 text-xs font-semibold uppercase tracking-wider text-[var(--foreground-muted)]"
     >
       {routing.locales.map((l) => (
         <option key={l} value={l}>

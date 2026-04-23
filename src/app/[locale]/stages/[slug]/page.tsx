@@ -4,6 +4,7 @@ import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { STAGES, getStageBySlug, type StageId } from '@/lib/stages';
 import { Stepper } from '@/components/stepper';
 import { routing } from '@/i18n/routing';
+import { STAGE_ICONS, ArrowLeftIcon, ArrowRightIcon } from '@/components/icons';
 
 export function generateStaticParams() {
   return routing.locales.flatMap((locale) =>
@@ -33,42 +34,54 @@ export default async function StagePage({
 
   const prev = STAGES[stage.order - 1];
   const next = STAGES[stage.order + 1];
+  const Icon = STAGE_ICONS[stage.id as StageId];
 
   return (
-    <main className="space-y-8 sm:space-y-10">
+    <main className="space-y-10 sm:space-y-14">
       <Stepper activeStageId={stage.id as StageId} />
 
-      <header className="space-y-3">
+      <header className="space-y-4 border-b border-[var(--border-subtle)] pb-6 sm:pb-8">
         <div className="flex items-center gap-3">
-          <span className="grid h-11 w-11 place-items-center rounded-xl bg-gradient-to-br from-brand-50 to-brand-100 text-2xl sm:h-12 sm:w-12">
-            {stage.icon}
+          <span className="grid h-10 w-10 place-items-center rounded-md border border-[var(--border-subtle)] bg-white text-[var(--foreground)]">
+            <Icon size={18} />
           </span>
-          <span className="text-xs font-bold uppercase tracking-wider text-brand-700 sm:text-sm">
-            Etapa {stage.order + 1} de {STAGES.length}
-          </span>
+          <div className="flex items-baseline gap-2 text-xs font-semibold uppercase tracking-[0.12em] text-[var(--accent)]">
+            <span className="font-[family-name:var(--font-newsreader)] text-lg font-medium text-[var(--foreground-muted)]">
+              {String(stage.order + 1).padStart(2, '0')}
+            </span>
+            <span>de {String(STAGES.length).padStart(2, '0')} · Etapa</span>
+          </div>
         </div>
-        <h1 className="font-[family-name:var(--font-fraunces)] text-3xl tracking-tight sm:text-4xl md:text-5xl">
+        <h1 className="font-[family-name:var(--font-newsreader)] text-3xl leading-[1.1] tracking-tight sm:text-4xl md:text-5xl">
           {t(`${stage.id}.title`)}
         </h1>
-        <p className="max-w-2xl text-base text-neutral-700 sm:text-lg">
+        <p className="max-w-2xl text-base text-[var(--foreground-muted)] sm:text-lg">
           {t(`${stage.id}.summary`)}
         </p>
       </header>
 
-      <article className="prose prose-neutral prose-sm max-w-none sm:prose-base prose-headings:font-[family-name:var(--font-fraunces)] prose-headings:tracking-tight prose-a:text-brand-700 prose-a:no-underline hover:prose-a:underline prose-strong:text-[var(--foreground)] prose-blockquote:border-l-brand-400 prose-blockquote:bg-brand-50/50 prose-blockquote:px-4 prose-blockquote:py-1 prose-blockquote:not-italic">
+      <article className="prose prose-editorial max-w-none prose-sm sm:prose-base prose-headings:font-[family-name:var(--font-newsreader)] prose-headings:font-medium prose-headings:tracking-tight prose-a:text-[var(--accent)] prose-a:font-medium prose-a:no-underline hover:prose-a:underline prose-strong:text-[var(--foreground)] prose-strong:font-semibold prose-blockquote:border-l-[var(--accent)] prose-blockquote:bg-[var(--surface-muted)] prose-blockquote:py-2 prose-blockquote:px-4 prose-blockquote:not-italic prose-blockquote:text-[var(--foreground)] prose-li:text-[var(--foreground)] prose-p:text-[var(--foreground)]">
         <Content />
       </article>
 
-      <nav className="no-print flex flex-col gap-2 border-t border-[var(--border-subtle)] pt-6 sm:flex-row sm:items-center sm:justify-between">
+      <nav className="no-print grid grid-cols-1 gap-3 border-t border-[var(--border-subtle)] pt-6 sm:grid-cols-2 sm:gap-4">
         {prev ? (
           <Link
             href={`/${locale}/stages/${prev.slug}`}
-            className="group inline-flex items-center justify-center gap-2 rounded-full border border-[var(--border-subtle)] bg-[var(--surface)] px-4 py-2.5 text-sm font-bold transition-all hover:border-brand-300 sm:justify-start"
+            className="group flex items-start gap-3 rounded-md border border-[var(--border-subtle)] bg-white p-4 transition-colors hover:border-[var(--foreground)]"
           >
-            <span aria-hidden className="transition-transform group-hover:-translate-x-0.5">
-              ←
-            </span>
-            <span className="truncate">{t(`${prev.id}.title`)}</span>
+            <ArrowLeftIcon
+              size={18}
+              className="mt-1 flex-none text-[var(--foreground-muted)] transition-transform group-hover:-translate-x-0.5 group-hover:text-[var(--foreground)]"
+            />
+            <div className="min-w-0">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-[var(--foreground-muted)]">
+                Anterior
+              </p>
+              <p className="mt-0.5 font-[family-name:var(--font-newsreader)] text-base tracking-tight text-[var(--foreground)]">
+                {t(`${prev.id}.title`)}
+              </p>
+            </div>
           </Link>
         ) : (
           <span className="hidden sm:block" />
@@ -76,12 +89,20 @@ export default async function StagePage({
         {next && (
           <Link
             href={`/${locale}/stages/${next.slug}`}
-            className="group inline-flex items-center justify-center gap-2 rounded-full bg-brand-600 px-4 py-2.5 text-sm font-bold text-white shadow-md shadow-brand-600/20 transition-all hover:-translate-y-0.5 hover:bg-brand-700 sm:justify-end"
+            className="group flex items-start justify-end gap-3 rounded-md bg-[var(--foreground)] p-4 text-white transition-colors hover:bg-[var(--accent-ink)] sm:text-right"
           >
-            <span className="truncate">Próxima: {t(`${next.id}.title`)}</span>
-            <span aria-hidden className="transition-transform group-hover:translate-x-0.5">
-              →
-            </span>
+            <div className="min-w-0 text-left sm:text-right">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-white/70">
+                Próxima etapa
+              </p>
+              <p className="mt-0.5 font-[family-name:var(--font-newsreader)] text-base tracking-tight">
+                {t(`${next.id}.title`)}
+              </p>
+            </div>
+            <ArrowRightIcon
+              size={18}
+              className="mt-1 flex-none text-white/80 transition-transform group-hover:translate-x-0.5"
+            />
           </Link>
         )}
       </nav>

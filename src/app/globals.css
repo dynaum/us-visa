@@ -2,83 +2,118 @@
 @plugin "@tailwindcss/typography";
 
 @theme {
-  --color-brand-50: oklch(0.97 0.015 245);
-  --color-brand-100: oklch(0.93 0.03 245);
-  --color-brand-200: oklch(0.85 0.06 245);
-  --color-brand-300: oklch(0.74 0.10 245);
-  --color-brand-400: oklch(0.62 0.14 245);
-  --color-brand-500: oklch(0.52 0.16 245);
-  --color-brand-600: oklch(0.44 0.16 245);
-  --color-brand-700: oklch(0.36 0.13 245);
-  --color-brand-800: oklch(0.29 0.10 245);
-  --color-brand-900: oklch(0.22 0.07 245);
+  /* Trust & Authority palette — navy primary, blue accent, slate neutrals */
+  --color-ink-50: #F8FAFC;
+  --color-ink-100: #F1F5F9;
+  --color-ink-200: #E2E8F0;
+  --color-ink-300: #CBD5E1;
+  --color-ink-400: #94A3B8;
+  --color-ink-500: #64748B;
+  --color-ink-600: #475569;
+  --color-ink-700: #334155;
+  --color-ink-800: #1E293B;
+  --color-ink-900: #0F172A;
+  --color-ink-950: #020617;
 
-  --font-sans: "Nunito", ui-sans-serif, system-ui, -apple-system, sans-serif;
-  --font-display: "Fraunces", ui-serif, Georgia, serif;
+  --color-accent-50: #F0F9FF;
+  --color-accent-100: #E0F2FE;
+  --color-accent-200: #BAE6FD;
+  --color-accent-300: #7DD3FC;
+  --color-accent-400: #38BDF8;
+  --color-accent-500: #0EA5E9;
+  --color-accent-600: #0284C7;
+  --color-accent-700: #0369A1;
+  --color-accent-800: #075985;
+  --color-accent-900: #0C4A6E;
+
+  --font-sans: "Roboto", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-display: "Newsreader", ui-serif, Georgia, serif;
 }
 
 :root {
-  --background: #fbfaf7;
-  --foreground: oklch(0.20 0.010 80);
-  --surface: #ffffff;
-  --surface-muted: #f4f1ec;
-  --border-subtle: oklch(0.88 0.010 80);
-  --border-strong: oklch(0.78 0.012 80);
+  --background: #F8FAFC;
+  --surface: #FFFFFF;
+  --surface-muted: #F1F5F9;
+  --foreground: #0F172A;
+  --foreground-muted: #475569;
+  --border-subtle: #E2E8F0;
+  --border-strong: #CBD5E1;
+
+  --ring: #0F172A;
+  --accent: #0369A1;
+  --accent-ink: #075985;
+  --destructive: #DC2626;
 }
 
 html {
   scroll-behavior: smooth;
-  /* Slightly smaller base on mobile for a calmer reading density */
-  font-size: 15.5px;
-}
-@media (min-width: 640px) {
-  html { font-size: 16px; }
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
 }
 
 html, body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
-  line-height: 1.6;
-}
-
-/* Soft warm gradient wash */
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  background:
-    radial-gradient(900px 500px at 8% -8%, color-mix(in oklch, var(--color-brand-300) 18%, transparent), transparent 55%),
-    radial-gradient(800px 400px at 92% 108%, color-mix(in oklch, var(--color-brand-400) 12%, transparent), transparent 55%),
-    radial-gradient(1200px 800px at 50% 50%, #fff 0%, transparent 60%);
-  pointer-events: none;
 }
 
 h1, h2, h3, h4 {
   font-family: var(--font-display);
-  /* Fraunces variable axes — SOFT rounds terminals, slight optical size bump */
-  font-variation-settings: "SOFT" 100, "WONK" 0, "opsz" 144;
   font-weight: 500;
-  letter-spacing: -0.015em;
-  line-height: 1.15;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+  color: var(--foreground);
 }
 
-a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible {
-  outline: 2px solid var(--color-brand-500);
+h1 { font-weight: 500; }
+h2 { font-weight: 500; }
+
+/* Editorial fine detail on first stage-article paragraph only (on desktop) */
+.prose-editorial > p:first-of-type::first-letter {
+  float: left;
+  font-family: var(--font-display);
+  font-size: 3.5rem;
+  line-height: 1;
+  font-weight: 500;
+  padding: 0.25rem 0.5rem 0 0;
+  color: var(--accent);
+}
+@media (max-width: 640px) {
+  .prose-editorial > p:first-of-type::first-letter {
+    float: none;
+    font-size: inherit;
+    padding: 0;
+    color: inherit;
+  }
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+[role="link"]:focus-visible {
+  outline: 2px solid var(--ring);
   outline-offset: 2px;
-  border-radius: 4px;
+  border-radius: 6px;
 }
 
-.surface {
-  background: var(--surface);
-  border: 1px solid var(--border-subtle);
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 @media print {
-  body::before { display: none; }
   header, footer, .no-print { display: none !important; }
   main { max-width: 100% !important; }
+  body { background: white; }
 }

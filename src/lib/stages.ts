@@ -5,22 +5,12 @@ export type Stage = {
   id: StageId;
   slug: StageId;
   order: number;
-  icon: string;
-};
-
-const ICONS: Record<StageId, string> = {
-  'mrv-fee': '💳',
-  'ds-160': '📝',
-  'scheduling': '📅',
-  'documents': '📁',
-  'interview': '🎙️',
 };
 
 export const STAGES: readonly Stage[] = STAGE_IDS.map((id, i) => ({
   id,
   slug: id,
   order: i,
-  icon: ICONS[id],
 }));
 
 export const stageIds = STAGES.map((s) => s.id);

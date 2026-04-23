@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { useLocale, useTranslations } from 'next-intl';
 import { STAGES, type StageId } from '@/lib/stages';
+import { STAGE_ICONS, CheckIcon } from './icons';
 
 export function Stepper({ activeStageId }: { activeStageId?: StageId }) {
   const locale = useLocale();
@@ -15,6 +16,7 @@ export function Stepper({ activeStageId }: { activeStageId?: StageId }) {
       {STAGES.map((stage, idx) => {
         const isActive = stage.id === activeStageId;
         const isPast = activeIndex > -1 && idx < activeIndex;
+        const Icon = STAGE_ICONS[stage.id];
 
         return (
           <li key={stage.id} className="contents">
@@ -22,30 +24,36 @@ export function Stepper({ activeStageId }: { activeStageId?: StageId }) {
               href={`/${locale}/stages/${stage.slug}`}
               aria-current={isActive ? 'step' : undefined}
               className={[
-                'group relative flex flex-col gap-1.5 rounded-2xl border p-3 transition-all',
+                'group relative flex flex-col gap-2 rounded-lg border p-3 transition-all',
                 isActive
-                  ? 'border-brand-500 bg-gradient-to-br from-brand-50 to-brand-100/60 shadow-sm'
-                  : 'border-[var(--border-subtle)] bg-[var(--surface)] hover:-translate-y-0.5 hover:border-brand-300 hover:shadow-sm',
+                  ? 'border-[var(--foreground)] bg-[var(--foreground)] text-white shadow-sm'
+                  : isPast
+                    ? 'border-[var(--border-subtle)] bg-white text-[var(--foreground)] hover:border-[var(--foreground)]'
+                    : 'border-[var(--border-subtle)] bg-white text-[var(--foreground-muted)] hover:border-[var(--border-strong)] hover:text-[var(--foreground)]',
               ].join(' ')}
             >
-              <div className="flex items-center gap-2">
+              <div className="flex items-center justify-between">
                 <span
                   className={[
-                    'grid h-7 w-7 place-items-center rounded-full text-xs font-bold transition-colors',
+                    'grid h-7 w-7 place-items-center rounded-md text-[11px] font-bold transition-colors',
                     isActive
-                      ? 'bg-brand-600 text-white'
+                      ? 'bg-white/15 text-white'
                       : isPast
-                        ? 'bg-brand-200 text-brand-900'
-                        : 'bg-[var(--surface-muted)] text-neutral-600',
+                        ? 'bg-[var(--foreground)] text-white'
+                        : 'bg-[var(--surface-muted)] text-[var(--foreground-muted)]',
                   ].join(' ')}
                 >
-                  {isPast ? '✓' : idx + 1}
+                  {isPast ? <CheckIcon size={14} /> : String(idx + 1).padStart(2, '0')}
                 </span>
-                <span className="text-lg" aria-hidden>
-                  {stage.icon}
+                <span
+                  className={
+                    isActive ? 'text-white/80' : 'text-[var(--foreground-muted)]'
+                  }
+                >
+                  <Icon size={18} />
                 </span>
               </div>
-              <span className="text-sm font-semibold leading-tight">{t(`${stage.id}.title`)}</span>
+              <span className="text-sm font-medium leading-tight">{t(`${stage.id}.title`)}</span>
             </Link>
           </li>
         );

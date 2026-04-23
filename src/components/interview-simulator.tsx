@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { readInterview, togglePracticed } from '@/lib/progress';
 import type { InterviewQuestion } from '@/content/pt-BR/interview-questions';
+import { ArrowLeftIcon, ArrowRightIcon, CheckIcon } from './icons';
 
 export function InterviewSimulator({ questions }: { questions: InterviewQuestion[] }) {
   const t = useTranslations('simulator');
@@ -20,47 +21,67 @@ export function InterviewSimulator({ questions }: { questions: InterviewQuestion
   const practicedCount = practiced.length;
 
   const go = (delta: number) => {
-    const next = (index + delta + questions.length) % questions.length;
-    setIndex(next);
+    const nextIndex = (index + delta + questions.length) % questions.length;
+    setIndex(nextIndex);
   };
 
   return (
-    <div className="space-y-5">
-      <div className="flex flex-wrap items-center justify-between gap-2 text-sm">
-        <p className="font-semibold text-neutral-700">
+    <div className="space-y-6">
+      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[var(--border-subtle)] pb-4 text-sm">
+        <p className="font-medium text-[var(--foreground)]">
           Pergunta{' '}
-          <span className="font-[family-name:var(--font-fraunces)] text-lg text-[var(--foreground)]">
+          <span className="font-[family-name:var(--font-newsreader)] text-xl font-medium">
             {index + 1}
           </span>{' '}
-          / {questions.length}
+          <span className="text-[var(--foreground-muted)]">/ {questions.length}</span>
         </p>
-        <p className="text-xs font-medium text-neutral-500">
-          Praticadas: {practicedCount} / {questions.length}
+        <p className="text-xs font-semibold uppercase tracking-[0.12em] text-[var(--foreground-muted)]">
+          Praticadas · {practicedCount} / {questions.length}
         </p>
       </div>
 
-      <article className="relative overflow-hidden rounded-2xl border border-[var(--border-subtle)] bg-[var(--surface)] p-5 shadow-sm sm:p-8">
-        <div
-          aria-hidden
-          className="absolute -right-12 -top-12 h-40 w-40 rounded-full bg-gradient-to-br from-brand-400/20 to-brand-700/10 blur-3xl"
-        />
-        <div className="relative space-y-4">
-          <p className="font-[family-name:var(--font-fraunces)] text-xl leading-tight tracking-tight sm:text-2xl md:text-3xl">
-            {q.pt}
-          </p>
-          <p className="text-sm italic text-neutral-600">{q.en}</p>
-          <div className="rounded-xl bg-[var(--surface-muted)] p-4 text-sm leading-relaxed">
-            <span className="mr-1 font-bold text-brand-700">Dica:</span>
-            {q.guidance}
+      <article className="rounded-lg border border-[var(--border-subtle)] bg-white p-5 sm:p-8">
+        <div className="space-y-5">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.12em] text-[var(--accent)]">
+              Em português
+            </p>
+            <p className="mt-2 font-[family-name:var(--font-newsreader)] text-2xl leading-tight tracking-tight sm:text-3xl md:text-4xl">
+              {q.pt}
+            </p>
+          </div>
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.12em] text-[var(--foreground-muted)]">
+              In English
+            </p>
+            <p className="mt-2 font-[family-name:var(--font-newsreader)] text-lg italic text-[var(--foreground-muted)] sm:text-xl">
+              {q.en}
+            </p>
+          </div>
+          <div className="rounded-md border-l-4 border-[var(--accent)] bg-[var(--surface-muted)] p-4">
+            <p className="text-xs font-semibold uppercase tracking-[0.12em] text-[var(--foreground-muted)]">
+              Como responder
+            </p>
+            <p className="mt-1 text-sm leading-relaxed text-[var(--foreground)]">{q.guidance}</p>
           </div>
 
-          <label className="mt-2 inline-flex cursor-pointer items-center gap-2 rounded-full border border-[var(--border-subtle)] bg-[var(--background)] px-3 py-1.5 text-sm font-semibold transition-colors hover:border-brand-300">
-            <input
-              type="checkbox"
-              checked={isPracticed}
-              onChange={() => setPracticed(togglePracticed(q.id).practiced)}
-              className="h-4 w-4 accent-brand-600"
-            />
+          <label className="mt-2 inline-flex cursor-pointer items-center gap-2.5 rounded-md border border-[var(--border-subtle)] bg-white px-3 py-2 text-sm font-medium transition-colors hover:border-[var(--foreground)]">
+            <span
+              className={[
+                'relative grid h-5 w-5 place-items-center rounded border-2 transition-colors',
+                isPracticed
+                  ? 'border-[var(--foreground)] bg-[var(--foreground)] text-white'
+                  : 'border-[var(--border-strong)] bg-white',
+              ].join(' ')}
+            >
+              <input
+                type="checkbox"
+                checked={isPracticed}
+                onChange={() => setPracticed(togglePracticed(q.id).practiced)}
+                className="absolute inset-0 cursor-pointer opacity-0"
+              />
+              {isPracticed && <CheckIcon size={12} />}
+            </span>
             {t('markPracticed')}
           </label>
         </div>
@@ -69,11 +90,12 @@ export function InterviewSimulator({ questions }: { questions: InterviewQuestion
       <div className="grid grid-cols-2 items-center gap-2 sm:flex sm:justify-between">
         <button
           onClick={() => go(-1)}
-          className="group order-1 inline-flex items-center justify-center gap-2 rounded-full border border-[var(--border-subtle)] bg-[var(--surface)] px-4 py-2.5 text-sm font-bold transition-all hover:border-brand-300 sm:order-1"
+          className="group order-1 inline-flex items-center justify-center gap-2 rounded-md border border-[var(--border-strong)] bg-white px-4 py-2.5 text-sm font-semibold text-[var(--foreground)] transition-colors hover:border-[var(--foreground)]"
         >
-          <span aria-hidden className="transition-transform group-hover:-translate-x-0.5">
-            ←
-          </span>
+          <ArrowLeftIcon
+            size={16}
+            className="transition-transform group-hover:-translate-x-0.5"
+          />
           {t('previous')}
         </button>
 
@@ -88,12 +110,12 @@ export function InterviewSimulator({ questions }: { questions: InterviewQuestion
               onClick={() => setIndex(i)}
               aria-label={`Ir para pergunta ${i + 1}`}
               className={[
-                'h-2.5 rounded-full transition-all',
+                'h-2 rounded-full transition-all',
                 i === index
-                  ? 'w-7 bg-brand-600'
+                  ? 'w-7 bg-[var(--foreground)]'
                   : practiced.includes(item.id)
-                    ? 'w-2.5 bg-brand-300'
-                    : 'w-2.5 bg-neutral-300',
+                    ? 'w-2 bg-[var(--foreground-muted)]'
+                    : 'w-2 bg-[var(--border-strong)]',
               ].join(' ')}
             />
           ))}
@@ -101,12 +123,13 @@ export function InterviewSimulator({ questions }: { questions: InterviewQuestion
 
         <button
           onClick={() => go(1)}
-          className="group order-2 inline-flex items-center justify-center gap-2 rounded-full bg-brand-600 px-4 py-2.5 text-sm font-bold text-white shadow-md shadow-brand-600/20 transition-all hover:-translate-y-0.5 hover:bg-brand-700 sm:order-3"
+          className="group order-2 inline-flex items-center justify-center gap-2 rounded-md bg-[var(--foreground)] px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[var(--accent-ink)] sm:order-3"
         >
           {t('next')}
-          <span aria-hidden className="transition-transform group-hover:translate-x-0.5">
-            →
-          </span>
+          <ArrowRightIcon
+            size={16}
+            className="transition-transform group-hover:translate-x-0.5"
+          />
         </button>
       </div>
     </div>
