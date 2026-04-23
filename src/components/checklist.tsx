@@ -29,10 +29,10 @@ export function Checklist({ groups }: { groups: ChecklistGroup[] }) {
     <div className="space-y-8">
       <div className="surface rounded-2xl p-5">
         <div className="flex items-baseline justify-between">
-          <p className="text-sm font-medium text-neutral-700 dark:text-neutral-300">
+          <p className="text-sm font-medium text-neutral-700">
             Progresso
           </p>
-          <p className="font-[family-name:var(--font-fraunces)] text-2xl font-semibold">
+          <p className="font-[family-name:var(--font-instrument-serif)] text-2xl font-semibold">
             {done}
             <span className="text-neutral-400"> / {total}</span>
           </p>
@@ -56,7 +56,7 @@ export function Checklist({ groups }: { groups: ChecklistGroup[] }) {
             <header className="flex items-center gap-3">
               <span
                 aria-hidden
-                className="grid h-9 w-9 place-items-center rounded-xl bg-gradient-to-br from-brand-50 to-brand-100 text-lg dark:from-brand-950 dark:to-brand-900"
+                className="grid h-9 w-9 place-items-center rounded-xl bg-gradient-to-br from-brand-50 to-brand-100 text-lg"
               >
                 {GROUP_ICONS[group.id] ?? '•'}
               </span>
@@ -77,7 +77,7 @@ export function Checklist({ groups }: { groups: ChecklistGroup[] }) {
                       className={[
                         'flex cursor-pointer items-center gap-3 px-4 py-3 transition-colors',
                         checked
-                          ? 'bg-brand-50/40 dark:bg-brand-950/20'
+                          ? 'bg-brand-50/40'
                           : 'hover:bg-[var(--surface-muted)]',
                       ].join(' ')}
                     >

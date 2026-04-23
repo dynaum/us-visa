@@ -23,14 +23,14 @@ export function Header() {
           >
             US
           </span>
-          <span className="font-[family-name:var(--font-fraunces)] text-lg">Visa Guide</span>
+          <span className="font-[family-name:var(--font-instrument-serif)] text-lg">Visa Guide</span>
         </Link>
         <nav className="flex flex-wrap items-center gap-1 text-sm">
           {links.map((l) => (
             <Link
               key={l.href}
               href={l.href}
-              className="rounded-md px-3 py-1.5 font-medium text-neutral-700 transition-colors hover:bg-[var(--surface-muted)] hover:text-[var(--foreground)] dark:text-neutral-300"
+              className="rounded-md px-3 py-1.5 font-medium text-neutral-700 transition-colors hover:bg-[var(--surface-muted)] hover:text-[var(--foreground)]"
             >
               {l.label}
             </Link>

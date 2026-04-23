@@ -27,9 +27,9 @@ export function InterviewSimulator({ questions }: { questions: InterviewQuestion
   return (
     <div className="space-y-5">
       <div className="flex flex-wrap items-center justify-between gap-2 text-sm">
-        <p className="font-medium text-neutral-700 dark:text-neutral-300">
+        <p className="font-medium text-neutral-700">
           Pergunta{' '}
-          <span className="font-[family-name:var(--font-fraunces)] text-lg font-semibold text-[var(--foreground)]">
+          <span className="font-[family-name:var(--font-instrument-serif)] text-lg font-semibold text-[var(--foreground)]">
             {index + 1}
           </span>{' '}
           / {questions.length}
@@ -45,12 +45,12 @@ export function InterviewSimulator({ questions }: { questions: InterviewQuestion
           className="absolute -right-12 -top-12 h-40 w-40 rounded-full bg-gradient-to-br from-brand-400/20 to-brand-700/10 blur-3xl"
         />
         <div className="relative space-y-4">
-          <p className="font-[family-name:var(--font-fraunces)] text-2xl font-semibold leading-tight tracking-tight sm:text-3xl">
+          <p className="font-[family-name:var(--font-instrument-serif)] text-2xl font-semibold leading-tight tracking-tight sm:text-3xl">
             {q.pt}
           </p>
-          <p className="text-sm italic text-neutral-600 dark:text-neutral-400">{q.en}</p>
+          <p className="text-sm italic text-neutral-600">{q.en}</p>
           <div className="rounded-xl bg-[var(--surface-muted)] p-4 text-sm leading-relaxed">
-            <span className="mr-1 font-semibold text-brand-700 dark:text-brand-300">Dica:</span>
+            <span className="mr-1 font-semibold text-brand-700">Dica:</span>
             {q.guidance}
           </div>
 
@@ -88,8 +88,8 @@ export function InterviewSimulator({ questions }: { questions: InterviewQuestion
                 i === index
                   ? 'w-6 bg-brand-600'
                   : practiced.includes(item.id)
-                    ? 'w-2 bg-brand-300 dark:bg-brand-700'
-                    : 'w-2 bg-neutral-300 dark:bg-neutral-700',
+                    ? 'w-2 bg-brand-300'
+                    : 'w-2 bg-neutral-300',
               ].join(' ')}
             />
           ))}

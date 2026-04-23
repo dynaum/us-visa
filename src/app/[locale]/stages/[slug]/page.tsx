@@ -40,22 +40,22 @@ export default async function StagePage({
 
       <header className="space-y-3">
         <div className="flex items-center gap-3">
-          <span className="grid h-12 w-12 place-items-center rounded-xl bg-gradient-to-br from-brand-50 to-brand-100 text-2xl dark:from-brand-950 dark:to-brand-900">
+          <span className="grid h-12 w-12 place-items-center rounded-xl bg-gradient-to-br from-brand-50 to-brand-100 text-2xl">
             {stage.icon}
           </span>
-          <span className="text-sm font-semibold uppercase tracking-wider text-brand-700 dark:text-brand-300">
+          <span className="text-sm font-semibold uppercase tracking-wider text-brand-700">
             Etapa {stage.order + 1} de {STAGES.length}
           </span>
         </div>
-        <h1 className="font-[family-name:var(--font-fraunces)] text-4xl font-semibold tracking-tight sm:text-5xl">
+        <h1 className="font-[family-name:var(--font-instrument-serif)] text-4xl font-semibold tracking-tight sm:text-5xl">
           {t(`${stage.id}.title`)}
         </h1>
-        <p className="max-w-2xl text-lg text-neutral-700 dark:text-neutral-300">
+        <p className="max-w-2xl text-lg text-neutral-700">
           {t(`${stage.id}.summary`)}
         </p>
       </header>
 
-      <article className="prose prose-neutral max-w-none prose-headings:font-[family-name:var(--font-fraunces)] prose-headings:tracking-tight prose-a:text-brand-700 prose-a:no-underline hover:prose-a:underline prose-strong:text-[var(--foreground)] prose-blockquote:border-l-brand-400 prose-blockquote:bg-brand-50/50 prose-blockquote:py-1 prose-blockquote:px-4 prose-blockquote:not-italic dark:prose-invert dark:prose-a:text-brand-300 dark:prose-blockquote:bg-brand-950/30">
+      <article className="prose prose-neutral max-w-none prose-headings:font-[family-name:var(--font-instrument-serif)] prose-headings:tracking-tight prose-a:text-brand-700 prose-a:no-underline hover:prose-a:underline prose-strong:text-[var(--foreground)] prose-blockquote:border-l-brand-400 prose-blockquote:bg-brand-50/50 prose-blockquote:py-1 prose-blockquote:px-4 prose-blockquote:not-italic">
         <Content />
       </article>
 

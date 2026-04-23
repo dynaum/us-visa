@@ -18,14 +18,14 @@ function ChecklistPageContent() {
   return (
     <main className="space-y-8">
       <header className="space-y-3">
-        <span className="inline-flex items-center gap-2 rounded-full border border-brand-200 bg-brand-50 px-3 py-1 text-xs font-medium text-brand-800 dark:border-brand-800 dark:bg-brand-950 dark:text-brand-200">
+        <span className="inline-flex items-center gap-2 rounded-full border border-brand-200 bg-brand-50 px-3 py-1 text-xs font-medium text-brand-800">
           <span aria-hidden>📋</span>
           Ferramenta
         </span>
-        <h1 className="font-[family-name:var(--font-fraunces)] text-4xl font-semibold tracking-tight sm:text-5xl">
+        <h1 className="font-[family-name:var(--font-instrument-serif)] text-4xl font-semibold tracking-tight sm:text-5xl">
           {t('heading')}
         </h1>
-        <p className="max-w-2xl text-lg text-neutral-700 dark:text-neutral-300">{t('intro')}</p>
+        <p className="max-w-2xl text-lg text-neutral-700">{t('intro')}</p>
       </header>
 
       <Checklist groups={CHECKLIST_GROUPS} />

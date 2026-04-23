@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import { Inter, Fraunces } from 'next/font/google';
+import { Manrope, Instrument_Serif } from 'next/font/google';
 import { notFound } from 'next/navigation';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages, setRequestLocale } from 'next-intl/server';
@@ -8,12 +8,18 @@ import { Header } from '@/components/header';
 import { Footer } from '@/components/footer';
 import { Disclaimer } from '@/components/disclaimer';
 
-const inter = Inter({ subsets: ['latin'], variable: '--font-inter', display: 'swap' });
-const fraunces = Fraunces({
+const manrope = Manrope({
   subsets: ['latin'],
-  variable: '--font-fraunces',
+  variable: '--font-manrope',
   display: 'swap',
-  axes: ['SOFT', 'WONK'],
+});
+
+const instrumentSerif = Instrument_Serif({
+  subsets: ['latin'],
+  weight: '400',
+  style: ['normal', 'italic'],
+  variable: '--font-instrument-serif',
+  display: 'swap',
 });
 
 export function generateStaticParams() {
@@ -34,7 +40,11 @@ export default async function LocaleLayout({
   const messages = await getMessages();
 
   return (
-    <html lang={locale} className={`${inter.variable} ${fraunces.variable}`}>
+    <html
+      lang={locale}
+      className={`${manrope.variable} ${instrumentSerif.variable}`}
+      style={{ colorScheme: 'light' }}
+    >
       <body className="flex min-h-screen flex-col">
         <NextIntlClientProvider locale={locale} messages={messages}>
           <Header />

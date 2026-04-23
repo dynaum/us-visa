@@ -24,7 +24,7 @@ export function Stepper({ activeStageId }: { activeStageId?: StageId }) {
               className={[
                 'group relative flex flex-col gap-1.5 rounded-xl border p-3 transition-all',
                 isActive
-                  ? 'border-brand-500 bg-gradient-to-br from-brand-50 to-brand-100/50 shadow-sm dark:from-brand-950 dark:to-brand-900/30'
+                  ? 'border-brand-500 bg-gradient-to-br from-brand-50 to-brand-100/50 shadow-sm'
                   : 'border-[var(--border-subtle)] bg-[var(--surface)] hover:-translate-y-0.5 hover:border-brand-300 hover:shadow-sm',
               ].join(' ')}
             >
@@ -35,8 +35,8 @@ export function Stepper({ activeStageId }: { activeStageId?: StageId }) {
                     isActive
                       ? 'bg-brand-600 text-white'
                       : isPast
-                        ? 'bg-brand-200 text-brand-900 dark:bg-brand-800 dark:text-brand-100'
-                        : 'bg-[var(--surface-muted)] text-neutral-600 dark:text-neutral-400',
+                        ? 'bg-brand-200 text-brand-900'
+                        : 'bg-[var(--surface-muted)] text-neutral-600',
                   ].join(' ')}
                 >
                   {isPast ? '✓' : idx + 1}
